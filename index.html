@@ -747,11 +747,6 @@
                     <img class="profile" src="profile.png" alt="Actualizar información">
                     <div style="height: 480px; width: 345px; overflow: hidden; position: relative; border-radius: 18px;">
                         <svg viewBox="0 0 280 130" preserveAspectRatio="none" style="height: 100%; width: 100%; position:absolute; border-radius:18px; filter: drop-shadow(2px 0px 13px black);">
-                            <defs>
-                                <pattern id="image" x="0" y="0" patternUnits="userSpaceOnUse" width="500" height="150">
-                                    <image xlink:href="fondo2.jpg" x="0" y="0" width="300" height="200" />
-                                </pattern>
-                            </defs>
                             <path d="M208.08,0.00 C152.69,67.09 298.81,131.75 200.80,150.00 L0.00,150.00 L0.00,0.00 Z" style="stroke: none; fill: #105bab;"></path>
                         </svg>
                     </div>
@@ -988,7 +983,9 @@
                                                 <i class="fas fa-address-card"></i>
                                             </label>
                                         </div>
-                                        <select class="form-control custom-select" id="tipoIdentificacion" name="tipoIdentificacion" style="font-size: 14px;"></select>
+                                        <select class="form-control custom-select" id="tipoIdentificacion" name="tipoIdentificacion" style="font-size: 14px;">
+                                            <option value="1">Cédula</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -1078,8 +1075,9 @@
                                                 <i class="fas fa-globe-americas"></i>
                                             </label>
                                         </div>
-                                        <select class="form-control custom-select" id="pais" name="pais" style="font-size: 14px;" data-opc="2" onchange="actualizarCampos(event)" required>
+                                        <select class="form-control custom-select" id="pais" name="pais" style="font-size: 14px;" data-opc="2" required>
                                             <option value="">Seleccione país</option>
+                                            <option value="1">Colombia</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1090,8 +1088,9 @@
                                                 <i class="fas fa-university"></i>
                                             </label>
                                         </div>
-                                        <select class="form-control custom-select" id="departamento" name="departamento" style="font-size: 14px;" data-opc="3" onchange="actualizarCampos(event)" required>
+                                        <select class="form-control custom-select" id="departamento" name="departamento" style="font-size: 14px;" data-opc="3" required>
                                             <option value="">Seleccione departamento</option>
+                                            <option value="1">Nariño</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1106,6 +1105,7 @@
                                         </div>
                                         <select class="form-control custom-select" id="municipio" name="municipio" style="font-size: 14px; height: 38px;" required>
                                             <option value="">Seleccione municipio</option>
+                                            <option value="1">Pasto</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1180,7 +1180,6 @@
             ajustarDimensionesFormulario(ancho);
         });
         ajustarDimensionesFormulario($(window).width());
-        actualizarCampos();
     });
 
     let defaults = 
@@ -1494,31 +1493,18 @@
         /** Se hace el registro de la información */
         /** ------------------------------------- */
 
-        let consulta = await fetch('http://192.168.1.200:8801/guardarTercero', {'method' : 'POST', 'body' : JSON.stringify(data)});
-        let result = await consulta.json();
+        $('#error').hide();
+        $('#success').css('display', 'flex');
+        $('#msgSuccess').css('display', 'flex');
+        $('#nombreSuccess').text(result.nombreCompleto);
+        $('#identificacionSuccess').text(result.identificacion);
 
-        if(result.status == 'success')
+        setTimeout(() =>
         {
-            $('#error').hide();
-            $('#success').css('display', 'flex');
-            $('#msgSuccess').css('display', 'flex');
-            $('#nombreSuccess').text(result.nombreCompleto);
-            $('#identificacionSuccess').text(result.identificacion);
-
-            setTimeout(() =>
-            {
-                setTimeout(shoot, 0);
-                setTimeout(shoot, 100);
-                setTimeout(shoot, 200);
-            }, 1000);
-        }
-        else
-        {
-            $('#success').hide();
-            $('#error').css('display', 'flex');
-            $('#msgError').text(result.message);
-            $('#msgSuccess').css('display', 'flex');
-        }
+            setTimeout(shoot, 0);
+            setTimeout(shoot, 100);
+            setTimeout(shoot, 200);
+        }, 1000);
         $('#btnActualizarInformacion').html('<i class="fas fa-sync-alt"></i> Actualizar información').prop('disabled', false);
     }
 
