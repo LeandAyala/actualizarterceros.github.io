@@ -1540,7 +1540,7 @@
         let Digito = 0;
         let Subtotal = 0;
         let Ceros = "000000000000000";
-        let identificacion = $('#identificacion').val();
+        let identificacion = $('#identificacion').val().replaceAll('.', '');
         let MatrizRegistros = new Array(3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71);
         let TempI = Ceros.substring(0, 15 - identificacion.length) + identificacion;
 
