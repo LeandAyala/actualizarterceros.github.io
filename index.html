@@ -1511,23 +1511,27 @@
         event.preventDefault();
         let data = Object.fromEntries(new FormData(event.currentTarget));
         $('#btnActualizarInformacion').html('<i class="fas fa-spinner fa-spin"></i> Actualizando información').prop('disabled', true);
-
+        
         /** Se hace el registro de la información */
         /** ------------------------------------- */
 
-        $('#error').hide();
-        $('#success').css('display', 'flex');
-        $('#msgSuccess').css('display', 'flex');
-        $('#identificacionSuccess').text('1.085.302.885');
-        $('#nombreSuccess').text('Carlos Andrés Pantoja');
-
-        setTimeout(() =>
+        setTimeout(() => 
         {
-            setTimeout(shoot, 0);
-            setTimeout(shoot, 100);
-            setTimeout(shoot, 200);
-        }, 1000);
-        $('#btnActualizarInformacion').html('<i class="fas fa-sync-alt"></i> Actualizar información').prop('disabled', false);
+            $('#error').hide();
+            $('#success').css('display', 'flex');
+            $('#msgSuccess').css('display', 'flex');
+            $('#identificacionSuccess').text('1.085.302.885');
+            $('#nombreSuccess').text('Carlos Andrés Pantoja');
+            $('#btnActualizarInformacion').html('<i class="fas fa-sync-alt"></i> Actualizar información').prop('disabled', false);
+
+            setTimeout(() =>
+            {
+                setTimeout(shoot, 0);
+                setTimeout(shoot, 100);
+                setTimeout(shoot, 200);
+            }, 1000);
+        }, 2000);
+
     }
 
     function buscarDigito() 
