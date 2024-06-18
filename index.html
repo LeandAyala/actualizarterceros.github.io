@@ -1,1194 +1,1426 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="logo.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.0.2/cleave.min.js" integrity="sha512-SvgzybymTn9KvnNGu0HxXiGoNeOi0TTK7viiG0EGn2Qbeu/NFi3JdWrJs2JHiGA1Lph+dxiDv5F9gDlcgBzjfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Actualizar información</title>
-    <style>
-        .patron {
-            top: 1%; 
-            left: 3%;
-            z-index: 1; 
-            width: 42%; 
-            position: absolute; 
-            transition: all 0.5s ease;
-        }
-
-        .imagenPatron {
-            left: 2%;
-            bottom: 0;
-            z-index: 1; 
-            width: 90%; 
-            opacity: 0.5;
-            position: absolute; 
-            transition: all 0.5s ease;
-        }
-
-        .logos {
-            opacity: 1;
-        }
-
-        .login {
-            top: 17%;
-            left: 14%; 
-            z-index: 1; 
-            width: 20%; 
-            position: absolute; 
-            transition: all 0.5s ease;
-        }
-
-        .logosMinus {
-            display: none;
-        }
-        
-        .loginMinus {
-            top: 15%;
-        }
-
-        .divMinus {
-            height: 130px;
-        }
-
-        .containerFormulario {
-            margin-left: -330px;
-            transition: all 0.5s ease;
-        }
-
-        .profile {
-            left: 0%; 
-            z-index: 1; 
-            width: 45%; 
-            bottom: 10%; 
-            position: absolute;
-            border-radius: 50%;
-            transition: all 0.5s ease;
-        }
-
-        .cornerFirst {
-            left: 3%;
-            width: 15%; 
-            height: 8%; 
-            z-index: 1; 
-            position: absolute; 
-            border-radius: 7px; 
-            background: #ef8c34; 
-        }
-
-        .cornerSecond {
-            left: 2%;
-            width: 5%; 
-            z-index: 1; 
-            height: 23%; 
-            position: absolute; 
-            background: #dc3545; 
-            border-radius: 7px 0px 0px 0px; 
-        }
-
-        .divFormulario {
-            padding: 30px 40px 10px 10px;
-        }
-
-        
-
-        .patronMinus {
-            top: 5%; 
-            left: 1%; 
-            z-index: 1; 
-            width: 78%; 
-            opacity: 0.6;
-            position: absolute;
-        }
-
-        .cornerMinus {
-            width: 5%; 
-            height: 40%; 
-            z-index: 1; 
-            position: absolute; 
-            border-radius: 7px;
-            background: #ef8c34; 
-        }
-
-        .logo {
-            top: 16%;
-            left: 5%;
-            z-index: 1;
-            width: 50px; 
-            display: none; 
-            position: absolute; 
-            transition: all 0.5s ease; 
-        }
-
-        .wave {
-            width: 100%; 
-            height: 100%; 
-            position:absolute; 
-            border-radius:18px; 
-            transition: all 0.5s ease;
-            filter: drop-shadow(2px 0px 13px black);
-        }
-
-        .containerPrincipal {
-            height: 482px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        @media screen and (min-width: 1480px) {
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="logo.ico" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.0.2/cleave.min.js" integrity="sha512-SvgzybymTn9KvnNGu0HxXiGoNeOi0TTK7viiG0EGn2Qbeu/NFi3JdWrJs2JHiGA1Lph+dxiDv5F9gDlcgBzjfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <title>Actualizar información</title>
+        <style>
             .patron {
-                width: 27%;
-            }
-
-            .login {
-                left: 10%;
-                width: 15%;
-            }
-
-            .profile {
-                width: 34%;
-            }
-
-            .imagenPatron {
-                width: 69%;
-            }
-        }
-
-        @media (max-width: 1240px) 
-        {
-            .containerFormulario {
-                margin-left: -250px;
-            }
-
-            .patron {
-                left: 4%;
-            }
-
-            .imagenPatron {
-                width: 103%;
-            }
-
-            .profile {
+                top: 1%; 
                 left: 3%;
-            }
-
-            .login {
-                top: 16%;
-                left: 15%;
-                width: 22%;
-            }
-        }
-
-        @media (max-width: 1166px) 
-        {
-            .login {
-                top: 14%;
-                left: 15%;
-                width: 25%;
-            }
-
-            .profile {
-                left: 4%;
-                bottom: 15%;
-            }
-
-            .cornerFirst {
-                left: 4%;
-            }
-
-            .cornerSecond {
-                left: 3%;
-            }
-
-            .patron {
-                left: 4%;
-            }
-
-            .imagenPatron {
-                width: 110%;
-            }
-        }
-
-        @media (max-width: 1100px) 
-        {
-            .containerFormulario {
-                margin-left: -210px;
-            }
-
-            .profile {
-                left: 5%;
-                bottom: 15%;
-            }
-
-            .patron {
-                left: 5%;
-            }
-        }
-
-        @media (max-width: 1078px) 
-        {
-            .login {
-                top: 16%;
-                left: 18%;
-                width: 25%;
-            }
-
-            .profile {
-                left: 7%;
-            }
-
-            .patron {
-                width: 50%;
-            }
-        }
-
-        @media (max-width: 1014px) 
-        {
-            .profile {
-                left: 8%;
-            }
-
-            .containerFormulario {
-                margin-left: -140px;
-            }
-
-            .login {
-                width: 28%;
-            }
-        }
-
-        @media (max-width: 932px)
-        {
-            .labelAsistenteDireccion{
-                display: none;
-            }
-        }
-
-        @media (max-width: 916px) 
-        {
-
-            .profile {
-                left: 3%;
-                width: 60%;
-            }
-
-            .login {
-                top: 13%;
-                left: 19%;
-                width: 30%;
-            }
-
-            .containerFormulario {
-                margin-left: -130px;
-            }
-
-            .imagenPatron {
-                width: 145%;
-            }
-        }
-
-        @media (max-width: 850px) 
-        {
-            .logos {
-                display: none;
-            }
-
-            .logosMinus {
-                display: block;
-            }
-
-            .containerFormulario {
-                margin-left: 0px;
-            }
-
-            .divFormulario {
-                padding: 0px 25px 10px 25px;
-            }
-
-            .containerPrincipal {
-                height: 97vh;
-            }
-        }
-
-        @media (max-width: 740px) 
-        {
-            .loginMinus {
-                top: 20%;
-            }
-
-            .divMinus {
-                height: 110px;
-            }
-
-            .wave {
-                filter: drop-shadow(2px 0px 10px black);
-            }
-        }
-
-        @media (max-width: 590px) 
-        {
-            .loginMinus {
-                top: 20%;
-            }
-
-            .divMinus {
-                height: 100px;
-            }
-
-            .logo {
-                top: 15%;
-            }
-
-            .wave {
-                filter: drop-shadow(2px 0px 6px black);
-            }
-        }
-
-        @media (max-width: 450px) 
-        {
-            .loginMinus {
-                top: 20%;
-                width: 29%;
-            }
-
-            .divMinus {
-                height: 80px;
-            }
-        }
-
-        @media (max-width: 412px) 
-        {
-            .loginMinus {
-                display: none;
-            }
-
-            .divMinus {
-                height: 69px;
-            }
-
-            .loginMinus {
-                top: 26%;
-                display: none;
-            }
-            
-            .logo {
-                top: 16;
-                width: 38px;
-                display: block;
-            }
-        }
-
-        
-
-        .form-control::placeholder {
-            font-size: 14px;
-        }
-
-        .form-control {
-            background: transparent;
-        }
-
-        .input-group-text {
-            width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custom-switch .custom-control-label::before {
-            background: transparent;
-        }
-
-        .btn-container {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-        }
-
-        .btn-container i {
-            display: inline-block;
-            position: relative;
-            top: -9px;
-        }
-
-        .label {
-            font-size: 13px;
-            color: #424242;
-            font-weight: 500;
-        }
-
-        .btn-color-mode-switch {
-            display: inline-block;
-            margin: 0px;
-            position: relative;
-        }
-
-        .btn-color-mode-switch > label.btn-color-mode-switch-inner {
-            margin: 0px;
-            width: 140px;
-            height: 30px;
-            background: #DDDDDD;
-            border-radius: 26px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
-            content: attr(data-on);
-            position: absolute;
-            font-size: 12px;
-            font-weight: 500;
-            top: 7px;
-            right: 20px;
-            font-size:11px;
-        }
-
-        .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
-            content: attr(data-off);
-            width: 70px;
-            height: 26px;
-            background: #105bab;
-            cursor: pointer;
-            border-radius: 26px;
-            position: absolute;
-            left: 2px;
-            top: 2px;
-            color: white;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0px 0px 6px -2px #111;
-            padding: 5px 0px;
-            font-size:11px;
-        }
-
-        .btn-color-mode-switch > .alert {
-            display: none;
-            background: #FF9800;
-            border: none;
-            color: #fff;
-        }
-
-        .btn-color-mode-switch input[type="checkbox"] {
-            cursor: pointer;
-            width: 50px;
-            height: 25px;
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            z-index: 1;
-            margin: 0px;
-        }
-
-        .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner {
-            background: #DDDDDD;
-            color: #424242;
-        }
-
-        .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
-            content: attr(data-on);
-            left: 68px;
-            background: #105bab;
-            color: white;
-        }
-
-        .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
-            content: attr(data-off);
-            right: auto;
-            left: 20px;
-        }
-
-        .btn-color-mode-switch input[type="checkbox"]:checked ~ .alert {
-            display: block;
-        }
-
-        .area {
-            width: 97%;
-            height: 100%;
-        }
-
-        .circles {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            position: absolute;
-        }
-
-        .circles li {
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 20px;
-            height: 20px;
-            background: #00000017;
-            animation: animate 25s linear infinite;
-            bottom: -150px;
-            
-        }
-
-        .circles li:nth-child(1) {
-            left: 25%;
-            width: 45px;
-            height: 45px;
-            animation-delay: 0s;
-        }
-
-
-        .circles li:nth-child(2) {
-            left: 10%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 2s;
-            animation-duration: 12s;
-        }
-
-        .circles li:nth-child(3) {
-            left: 70%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 4s;
-        }
-
-        .circles li:nth-child(4) {
-            left: 40%;
-            width: 30px;
-            height: 30px;
-            animation-delay: 0s;
-            animation-duration: 18s;
-        }
-
-        .circles li:nth-child(5) {
-            left: 65%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 0s;
-        }
-
-        .circles li:nth-child(6) {
-            left: 56%;
-            width: 55px;
-            height: 55px;
-            animation-delay: 3s;
-        }
-
-        .circles li:nth-child(7) {
-            left: 13%;
-            width: 40px;
-            height: 40px;
-            animation-delay: 7s;
-        }
-
-        .circles li:nth-child(8) {
-            left: 50%;
-            width: 65px;
-            height: 65px;
-            animation-delay: 15s;
-            animation-duration: 45s;
-        }
-
-        .circles li:nth-child(9) {
-            left: 20%;
-            width: 15px;
-            height: 15px;
-            animation-delay: 2s;
-            animation-duration: 35s;
-        }
-
-        .circles li:nth-child(10) {
-            left: 77%;
-            width: 50px;
-            height: 50px;
-            animation-delay: 0s;
-            animation-duration: 11s;
-        }
-
-        @keyframes animate {
-            0%{
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-                border-radius: 0;
-            }
-            100%{
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-                border-radius: 50%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container-fluid" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;">
-        <div class="animate__animated animate__fadeIn" style="position: absolute; width: 100%; height: 100%; z-index: 1; display: none; align-items: center; justify-content: center;" id="msgSuccess">
-            <div style="position: absolute; width: 100%; height: 100%; background: white; opacity: 0.5;"></div>
-            <div id="success" style="
-                width: 270px; 
-                height: 300px; 
-                display: flex;
-                padding: 15px;
-                border-radius: 7px; 
-                position: relative; 
-                align-items: center;
-                background: #105bab; 
-                flex-direction: column;
-                background-size: cover;
-                filter: drop-shadow(3px 3px 11px black);
-            ">
-                <div style="width:96%; height:93%; position:absolute; z-index:1">
-                    <div class="area" >
-                        <ul class="circles">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                </div>
-                <div onclick="cerrarMsgSuccess()" style="
-                    top: 9px;
-                    z-index: 1;
-                    width: 20px;
-                    right: 12px;
-                    height: 20px;
-                    display: flex;
-                    position: absolute;
-                    border-radius: 50%;
-                    align-items: center;
-                    justify-content: center;
-                    background: #ffffff36;
-                ">
-                    <i class="fas fa-times text-light" style="font-size: 12px; cursor: pointer;"></i>
-                </div>
-                <div style="width: 120px; height: 120px; display: flex; align-items: center; border-radius: 50%; background: #ffffff3b; margin-top: 10px;">
-                    <img src="success.png" alt="Registro exitoso" style="width: 100%;" class="animate__animated animate__flipInX">
-                </div>
-                <b style="color: white; margin-top: 10px;">¡REGISTRO EXITOSO!</b>
-                <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px;">
-                    <i class="fas fa-user-circle text-warning" style="font-size: 18px;"></i>
-                    <b style="font-size: 12px; color: white; margin-left: 6px;" id="nombreSuccess"></b>
-                </div>
-                <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px; margin-top: 10px;">
-                    <i class="fas fa-info-circle text-warning" style="font-size: 18px;"></i>
-                    <b style="font-size: 12px; color: white; margin-left: 6px;" id="identificacionSuccess"></b>
-                </div>
-            </div>
-            <div id="error" style="
-                width: 270px; 
-                height: 300px; 
-                display: none;
-                padding: 15px;
-                border-radius: 7px; 
-                position: relative; 
-                align-items: center;
-                background: #105bab; 
-                flex-direction: column;
-                background-size: cover;
-                filter: drop-shadow(3px 3px 11px black);
-            ">
-                <div style="width:96%; height:93%; position:absolute; z-index:1">
-                    <div class="area" >
-                        <ul class="circles">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                </div>
-                <div onclick="cerrarMsgSuccess()" style="
-                    top: 9px;
-                    z-index: 1;
-                    width: 20px;
-                    right: 12px;
-                    height: 20px;
-                    display: flex;
-                    position: absolute;
-                    border-radius: 50%;
-                    align-items: center;
-                    justify-content: center;
-                    background: #ffffff36;
-                ">
-                    <i class="fas fa-times text-light" style="font-size: 12px; cursor: pointer;"></i>
-                </div>
-                <div style="width: 120px; height: 120px; display: flex; align-items: center; border-radius: 50%; background: #ffffff8a; margin-top: 20px;">
-                    <img src="error.png" alt="Registro exitoso" style="width: 100%;" class="animate__animated animate__flipInX">
-                </div>
-                <b style="color: white; margin-top: 20px;">¡HA OCURRIDO UN ERROR!</b>
-                <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px;">
-                    <div style="background: white; border-radius: 50%; height: 15px; width: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-times-circle text-danger" style="font-size: 18px;"></i>
-                    </div>
-                    <b style="font-size: 12px; color: white; margin-left: 6px;" id="msgError"></b>
-                </div>
-            </div>
-        </div>
-        <div 
-            class="list-group-item p-0 containerPrincipal" 
-            style="
-                width: 100%;
-                position: relative;
-                border-radius: 18px; 
-                background-size: cover; 
-                background-image: url(); 
+                z-index: 1; 
+                width: 42%; 
+                position: absolute; 
                 transition: all 0.5s ease;
-                background-position: center;
-                background-clip: content-box; 
-                box-shadow: -1px 8px 20px 0px gray;
-            "
-        >
-            <video id="video" autoplay loop muted style="position: absolute; width: 100%; height: 100%; border-radius: 19px; object-fit: cover; opacity: 0.2; transition: all 3s ease;">
-                <source src="fondo4.mp4" type="video/mp4">
-            </video>
-            <div class="row" style="border-radius: 18px;">
-                <div class="col-6 logos animate__animated animate__fadeIn" style="position: relative;">
-                    <div hidden class="cornerFirst"></div>
-                    <div hidden class="cornerSecond"></div>
-                    <img class="patron" src="fondoPatron.png" alt="Actualizar información">
-                    <img class="imagenPatron" src="imagenPatron.png" alt="Actualizar información">
-                    <img class="login animate__animated animate__flipInX" src="login.png" alt="Actualizar información">
-                    <img class="profile" src="profile.png" alt="Actualizar información">
-                    <div style="height: 480px; width: 345px; overflow: hidden; position: relative; border-radius: 18px;">
-                        <svg viewBox="0 0 280 130" preserveAspectRatio="none" style="height: 100%; width: 100%; position:absolute; border-radius:18px; filter: drop-shadow(2px 0px 13px black);">
-                            <path d="M208.08,0.00 C152.69,67.09 298.81,131.75 200.80,150.00 L0.00,150.00 L0.00,0.00 Z" style="stroke: none; fill: #105bab;"></path>
-                        </svg>
+            }
+    
+            .imagenPatron {
+                left: 2%;
+                bottom: 0;
+                z-index: 1; 
+                width: 90%; 
+                opacity: 0.5;
+                position: absolute; 
+                transition: all 0.5s ease;
+            }
+    
+            .logos {
+                opacity: 1;
+            }
+    
+            .login {
+                top: 17%;
+                left: 14%; 
+                z-index: 1; 
+                width: 20%; 
+                position: absolute; 
+                transition: all 0.5s ease;
+            }
+    
+            .logosMinus {
+                display: none;
+            }
+            
+            .loginMinus {
+                top: 17%;
+                left: 7%;
+                width: 22%; 
+            }
+    
+            .divMinus {
+                height: 130px;
+            }
+    
+            .containerFormulario {
+                margin-left: -330px;
+                transition: all 0.5s ease;
+            }
+    
+            .profile {
+                left: 0%; 
+                z-index: 1; 
+                width: 45%; 
+                bottom: 10%; 
+                position: absolute;
+                border-radius: 50%;
+                transition: all 0.5s ease;
+            }
+    
+            .cornerFirst {
+                left: 3%;
+                width: 15%; 
+                height: 8%; 
+                z-index: 1; 
+                position: absolute; 
+                border-radius: 7px; 
+                background: #ef8c34; 
+            }
+    
+            .cornerSecond {
+                left: 2%;
+                width: 5%; 
+                z-index: 1; 
+                height: 23%; 
+                position: absolute; 
+                background: #dc3545; 
+                border-radius: 7px 0px 0px 0px; 
+            }
+    
+            .divFormulario {
+                position: relative;
+                padding: 30px 40px 10px 10px;
+            }
+    
+            
+    
+            .patronMinus {
+                top: 5%; 
+                left: 1%; 
+                z-index: 1; 
+                width: 78%; 
+                opacity: 0.6;
+                position: absolute;
+            }
+    
+            .cornerMinus {
+                opacity: 0;
+            }
+    
+            .logo {
+                top: 16%;
+                left: 12%;
+                z-index: 1;
+                width: 50px; 
+                display: none;
+                filter: invert(0.7); 
+                position: absolute; 
+                transition: all 0.5s ease; 
+            }
+    
+            .wave {
+                width: 100%; 
+                height: 100%; 
+                position:absolute; 
+                border-radius:18px; 
+                transition: all 0.5s ease;
+                filter: drop-shadow(2px 0px 13px black);
+            }
+    
+            .containerPrincipal {
+                height: 482px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .fondoAnimado {
+                width:38%; 
+                z-index:1; 
+                left: 0px;
+                height:100%; 
+                position:absolute; 
+                transition: all 0.5s ease;
+            }
+
+            .creadoPor {
+                opacity: 1;
+                transition: all 0.5s ease;
+            }
+
+            .fondoAnimadoMinus {
+                width:39%; 
+                z-index:1; 
+                left: 0px;
+                height:72%; 
+                position:absolute; 
+                transition: all 0.5s ease;
+            }
+
+            .corner1 {
+                z-index: 1;
+                left: -47px;
+                top: -132px;
+                width: 100px;
+                height: 192px;
+                position:absolute;
+                border-radius: 50%;
+                transition: all 0.5s ease;
+                background: rgb(26 164 175);
+                filter: drop-shadow(-3px 3px 5px black);
+            }
+
+            .corner2 {
+                z-index: 1;
+                left: -68px;
+                top: -57px;
+                width: 100px;
+                height: 125px;
+                position:absolute;
+                border-radius: 50%;
+                transition: all 0.5s ease;
+                background: rgb(233 127 16);
+                filter: drop-shadow(-3px 3px 5px black);
+            }
+
+            .corner3 {
+                z-index: 1;
+                top: -24px;
+                left: -80px;
+                width: 100px;
+                height: 96px;
+                position:absolute;
+                border-radius: 50%;
+                transition: all 0.5s ease;
+                background: rgb(44 163 60);
+                filter: drop-shadow(-3px 3px 5px black);
+            }
+
+            .creadoPorMinus {
+                z-index: 1;
+                right: 25px;
+                bottom: 20px;
+                width: 120px;
+                display: none;
+                position: absolute;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+
+            .creadoPorMinusCabecera {
+                z-index: 1;
+                right: 15px;
+                bottom: 12px;
+                width: 120px;
+                display: none;
+                position: absolute;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+    
+            @media screen and (min-width: 1480px) {
+                .patron {
+                    width: 27%;
+                }
+    
+                .login {
+                    left: 10%;
+                    width: 15%;
+                }
+    
+                .profile {
+                    width: 34%;
+                }
+    
+                .imagenPatron {
+                    width: 69%;
+                }
+            }
+    
+            @media (max-width: 1240px) 
+            {
+                .containerFormulario {
+                    margin-left: -250px;
+                }
+    
+                .patron {
+                    left: 4%;
+                }
+    
+                .imagenPatron {
+                    width: 103%;
+                }
+    
+                .profile {
+                    left: 3%;
+                }
+    
+                .login {
+                    top: 16%;
+                    left: 15%;
+                    width: 22%;
+                }
+            }
+    
+            @media (max-width: 1166px) 
+            {
+                .login {
+                    top: 14%;
+                    left: 15%;
+                    width: 25%;
+                }
+    
+                .profile {
+                    left: 4%;
+                    bottom: 15%;
+                }
+    
+                .cornerFirst {
+                    left: 4%;
+                }
+    
+                .cornerSecond {
+                    left: 3%;
+                }
+    
+                .patron {
+                    left: 4%;
+                }
+    
+                .imagenPatron {
+                    width: 110%;
+                }
+            }
+    
+            @media (max-width: 1100px) 
+            {
+                .containerFormulario {
+                    margin-left: -210px;
+                }
+    
+                .profile {
+                    left: 5%;
+                    bottom: 15%;
+                }
+    
+                .patron {
+                    left: 5%;
+                }
+
+                .fondoAnimado {
+                    width: 46%;
+                }
+            }
+    
+            @media (max-width: 1078px) 
+            {
+                .login {
+                    top: 16%;
+                    left: 18%;
+                    width: 25%;
+                }
+    
+                .profile {
+                    left: 7%;
+                }
+    
+                .patron {
+                    width: 50%;
+                }
+            }
+    
+            @media (max-width: 1014px) 
+            {
+                .profile {
+                    left: 8%;
+                }
+    
+                .containerFormulario {
+                    margin-left: -140px;
+                }
+    
+                .login {
+                    width: 28%;
+                }
+
+                .fondoAnimado {
+                    width: 50%;
+                }
+            }
+    
+            @media (max-width: 932px)
+            {
+                .labelAsistenteDireccion{
+                    display: none;
+                }
+            }
+    
+            @media (max-width: 916px) 
+            {
+    
+                .profile {
+                    left: 3%;
+                    width: 60%;
+                }
+    
+                .login {
+                    top: 13%;
+                    left: 19%;
+                    width: 30%;
+                }
+    
+                .containerFormulario {
+                    margin-left: -130px;
+                }
+    
+                .imagenPatron {
+                    width: 145%;
+                }
+            }
+    
+            @media (max-width: 850px) 
+            {
+                .logos {
+                    display: none;
+                }
+    
+                .logosMinus {
+                    display: block;
+                }
+    
+                .containerFormulario {
+                    margin-left: 0px;
+                }
+    
+                .divFormulario {
+                    padding: 0px 25px 10px 25px;
+                }
+    
+                .containerPrincipal {
+                    height: 97vh;
+                }
+
+                .creadoPor {
+                    opacity: 0;
+                }
+
+                .cornerMinus {
+                    opacity: 1;
+                }
+
+                .creadoPorMinus {
+                    display: flex;
+                }
+            }
+    
+            @media (max-width: 740px) 
+            {
+                .loginMinus {
+                    top: 20%;
+                }
+    
+                .divMinus {
+                    height: 110px;
+                }
+    
+                .wave {
+                    filter: drop-shadow(2px 0px 10px black);
+                }
+            }
+
+            @media (max-width: 630px) 
+            {
+                .loginMinus {
+                    left: 8%;
+                }
+            }
+    
+            @media (max-width: 590px) 
+            {
+                .loginMinus {
+                    top: 20%;
+                }
+    
+                .divMinus {
+                    height: 100px;
+                }
+    
+                .logo {
+                    top: 15%;
+                }
+    
+                .wave {
+                    filter: drop-shadow(2px 0px 6px black);
+                }
+
+                .loginMinus {
+                    left: 9%;
+                }
+
+                .corner3 {
+                    height: 80px;
+                }
+
+                .corner2 {
+                    height: 110px;
+                }
+
+                .corner1 {
+                    height: 180px;
+                }
+            }
+    
+            @media (max-width: 450px) 
+            {
+                .loginMinus {
+                    top: 20%;
+                    left: 11%;
+                    width: 22%;
+                }
+    
+                .divMinus {
+                    height: 80px;
+                }
+            }
+            
+            @media (max-width: 420px) 
+            {
+                .creadoPorMinus {
+                    display: none;
+                }
+
+                .creadoPorMinusCabecera {
+                    display: flex;
+                }
+            }
+
+            @media (max-width: 412px) 
+            {
+                .loginMinus {
+                    display: none;
+                }
+    
+                .divMinus {
+                    height: 69px;
+                }
+    
+                .loginMinus {
+                    top: 26%;
+                    display: none;
+                }
+                
+                .logo {
+                    top: 16;
+                    left: 13%;
+                    width: 30px;
+                    display: block;
+                }
+
+                .corner3 {
+                    height: 70px;
+                }
+
+                .corner2 {
+                    height: 100px;
+                }
+
+                .corner1 {
+                    height: 170px;
+                }
+            }
+    
+            @media (max-width: 350px) 
+            {   
+                .logo {
+                    top: 16;
+                    left: 15%;
+                    width: 30px;
+                    display: block;
+                }
+
+                .corner3 {
+                    height: 70px;
+                }
+
+                .corner2 {
+                    height: 100px;
+                }
+
+                .corner1 {
+                    height: 170px;
+                }
+            }
+
+            @media (max-width: 350px) 
+            {   
+                .logo {
+                    left: 16%;
+                }
+
+                .fondoAnimadoMinus {
+                    width: 100%;
+                }
+            }
+    
+            .form-control::placeholder {
+                font-size: 14px;
+            }
+    
+            .form-control {
+                background: transparent;
+            }
+    
+            .input-group-text {
+                width: 46px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+    
+            .custom-switch .custom-control-label::before {
+                background: transparent;
+            }
+    
+            .btn-container {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+    
+            .btn-container i {
+                display: inline-block;
+                position: relative;
+                top: -9px;
+            }
+    
+            .label {
+                font-size: 13px;
+                color: #424242;
+                font-weight: 500;
+            }
+    
+            .btn-color-mode-switch {
+                display: inline-block;
+                margin: 0px;
+                position: relative;
+            }
+    
+            .btn-color-mode-switch > label.btn-color-mode-switch-inner {
+                margin: 0px;
+                width: 140px;
+                height: 30px;
+                background: #DDDDDD;
+                border-radius: 26px;
+                overflow: hidden;
+                position: relative;
+                transition: all 0.3s ease;
+                display: block;
+            }
+    
+            .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+                content: attr(data-on);
+                position: absolute;
+                font-size: 12px;
+                font-weight: 500;
+                top: 7px;
+                right: 20px;
+                font-size:11px;
+            }
+    
+            .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
+                content: attr(data-off);
+                width: 70px;
+                height: 26px;
+                background: #105bab;
+                cursor: pointer;
+                border-radius: 26px;
+                position: absolute;
+                left: 2px;
+                top: 2px;
+                color: white;
+                text-align: center;
+                transition: all 0.3s ease;
+                box-shadow: 0px 0px 6px -2px #111;
+                padding: 5px 0px;
+                font-size:11px;
+            }
+    
+            .btn-color-mode-switch > .alert {
+                display: none;
+                background: #FF9800;
+                border: none;
+                color: #fff;
+            }
+    
+            .btn-color-mode-switch input[type="checkbox"] {
+                cursor: pointer;
+                width: 50px;
+                height: 25px;
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                z-index: 1;
+                margin: 0px;
+            }
+    
+            .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner {
+                background: #DDDDDD;
+                color: #424242;
+            }
+    
+            .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
+                content: attr(data-on);
+                left: 68px;
+                background: #105bab;
+                color: white;
+            }
+    
+            .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
+                content: attr(data-off);
+                right: auto;
+                left: 20px;
+            }
+    
+            .btn-color-mode-switch input[type="checkbox"]:checked ~ .alert {
+                display: block;
+            }
+    
+            .area {
+                width: 97%;
+                height: 100%;
+            }
+    
+            .circles {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                position: absolute;
+            }
+    
+            .circles li {
+                position: absolute;
+                display: block;
+                list-style: none;
+                width: 20px;
+                height: 20px;
+                background: #00000017;
+                animation: animate 25s linear infinite;
+                bottom: -150px;
+                
+            }
+    
+            .circles li:nth-child(1) {
+                left: 25%;
+                width: 45px;
+                height: 45px;
+                animation-delay: 0s;
+            }
+    
+    
+            .circles li:nth-child(2) {
+                left: 10%;
+                width: 20px;
+                height: 20px;
+                animation-delay: 2s;
+                animation-duration: 12s;
+            }
+    
+            .circles li:nth-child(3) {
+                left: 70%;
+                width: 20px;
+                height: 20px;
+                animation-delay: 4s;
+            }
+    
+            .circles li:nth-child(4) {
+                left: 40%;
+                width: 30px;
+                height: 30px;
+                animation-delay: 0s;
+                animation-duration: 18s;
+            }
+    
+            .circles li:nth-child(5) {
+                left: 65%;
+                width: 20px;
+                height: 20px;
+                animation-delay: 0s;
+            }
+    
+            .circles li:nth-child(6) {
+                left: 56%;
+                width: 55px;
+                height: 55px;
+                animation-delay: 3s;
+            }
+    
+            .circles li:nth-child(7) {
+                left: 13%;
+                width: 40px;
+                height: 40px;
+                animation-delay: 7s;
+            }
+    
+            .circles li:nth-child(8) {
+                left: 50%;
+                width: 65px;
+                height: 65px;
+                animation-delay: 15s;
+                animation-duration: 45s;
+            }
+    
+            .circles li:nth-child(9) {
+                left: 20%;
+                width: 15px;
+                height: 15px;
+                animation-delay: 2s;
+                animation-duration: 35s;
+            }
+    
+            .circles li:nth-child(10) {
+                left: 77%;
+                width: 50px;
+                height: 50px;
+                animation-delay: 0s;
+                animation-duration: 11s;
+            }
+    
+            @keyframes animate {
+                0%{
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                    border-radius: 0;
+                }
+                100%{
+                    transform: translateY(-1000px) rotate(720deg);
+                    opacity: 0;
+                    border-radius: 50%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;">
+            <div class="animate__animated animate__fadeIn" style="position: absolute; width: 100%; height: 100%; z-index: 2; display: none; align-items: center; justify-content: center;" id="msgSuccess">
+                <div style="position: absolute; width: 100%; height: 100%; background: white; opacity: 0.5;"></div>
+                <div id="success" style="
+                    width: 270px; 
+                    height: 300px; 
+                    display: flex;
+                    padding: 15px;
+                    border-radius: 7px; 
+                    position: relative; 
+                    align-items: center;
+                    background: #105bab; 
+                    flex-direction: column;
+                    background-size: cover;
+                    filter: drop-shadow(3px 3px 11px black);
+                ">
+                    <div style="width:96%; height:93%; position:absolute; z-index:1">
+                        <div class="area" >
+                            <ul class="circles">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div onclick="cerrarMsgSuccess()" style="
+                        top: 9px;
+                        z-index: 1;
+                        width: 20px;
+                        right: 12px;
+                        height: 20px;
+                        display: flex;
+                        position: absolute;
+                        border-radius: 50%;
+                        align-items: center;
+                        justify-content: center;
+                        background: #ffffff36;
+                    ">
+                        <i class="fas fa-times text-light" style="font-size: 12px; cursor: pointer;"></i>
+                    </div>
+                    <div style="width: 120px; height: 120px; display: flex; align-items: center; border-radius: 50%; background: #ffffff3b; margin-top: 10px;">
+                        <img src="success.png" alt="Registro exitoso" style="width: 100%;" class="animate__animated animate__flipInX">
+                    </div>
+                    <b style="color: white; margin-top: 10px;">¡REGISTRO EXITOSO!</b>
+                    <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px;">
+                        <i class="fas fa-user-circle text-warning" style="font-size: 18px;"></i>
+                        <b style="font-size: 12px; color: white; margin-left: 6px;" id="nombreSuccess"></b>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px; margin-top: 10px;">
+                        <i class="fas fa-info-circle text-warning" style="font-size: 18px;"></i>
+                        <b style="font-size: 12px; color: white; margin-left: 6px;" id="identificacionSuccess"></b>
                     </div>
                 </div>
-                <div class="col containerFormulario">
-                    <div style="position: relative;" class="logosMinus animate__animated animate__fadeIn">
-                        <div hidden class="cornerMinus"></div>
-                        <img class="patronMinus" src="patronBanner.png" alt="Actualizar información">
-                        <img class="loginMinus animate__animated animate__flipInX" src="login.png" alt="Actualizar información" style="transition: all 0.5s ease; position: absolute; z-index: 1; width: 27%; left: 5%;">
-                        <img class="logo animate__animated animate__flipInX" src="logo2.png" alt="Actualizar información">
-                        <div class="divMinus" style="transition: all 0.5s ease; overflow: hidden; position: relative; border-radius: 18px;">
-                            <svg class="wave" viewBox="0 0 500 150" preserveAspectRatio="none">
-                                <path d="M-1.97,92.28 C131.20,196.88 241.25,-42.91 505.92,102.14 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #105bab;"></path>
+                <div id="error" style="
+                    width: 270px; 
+                    height: 300px; 
+                    display: none;
+                    padding: 15px;
+                    border-radius: 7px; 
+                    position: relative; 
+                    align-items: center;
+                    background: #105bab; 
+                    flex-direction: column;
+                    background-size: cover;
+                    filter: drop-shadow(3px 3px 11px black);
+                ">
+                    <div style="width:96%; height:93%; position:absolute; z-index:1">
+                        <div class="area" >
+                            <ul class="circles">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div onclick="cerrarMsgSuccess()" style="
+                        top: 9px;
+                        z-index: 1;
+                        width: 20px;
+                        right: 12px;
+                        height: 20px;
+                        display: flex;
+                        position: absolute;
+                        border-radius: 50%;
+                        align-items: center;
+                        justify-content: center;
+                        background: #ffffff36;
+                    ">
+                        <i class="fas fa-times text-light" style="font-size: 12px; cursor: pointer;"></i>
+                    </div>
+                    <div style="width: 120px; height: 120px; display: flex; align-items: center; border-radius: 50%; background: #ffffff8a; margin-top: 20px;">
+                        <img src="error.png" alt="Registro exitoso" style="width: 100%;" class="animate__animated animate__flipInX">
+                    </div>
+                    <b style="color: white; margin-top: 20px;">¡HA OCURRIDO UN ERROR!</b>
+                    <div style="display: flex; align-items: center; margin-top: 10px; width: 100%; padding: 10px 15px; background: #ffffff36; border-radius: 7px;">
+                        <div style="background: white; border-radius: 50%; height: 15px; width: 15px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-times-circle text-danger" style="font-size: 18px;"></i>
+                        </div>
+                        <b style="font-size: 12px; color: white; margin-left: 6px;" id="msgError"></b>
+                    </div>
+                </div>
+            </div>
+            <div 
+                class="list-group-item p-0 containerPrincipal" 
+                style="
+                    width: 100%;
+                    position: relative;
+                    border-radius: 18px; 
+                    background-size: cover; 
+                    background-image: url(); 
+                    transition: all 0.5s ease;
+                    background-position: center;
+                    background-clip: content-box; 
+                    box-shadow: -1px 8px 20px 0px gray;
+                "
+            >
+                <video id="video" autoplay loop muted style="position: absolute; width: 100%; height: 100%; border-radius: 19px; object-fit: cover; opacity: 0.1; transition: all 3s ease;">
+                    <source src="fondo4.mp4" type="video/mp4">
+                </video>
+                <div class="row" style="border-radius: 18px;">
+                    <div class="col-6 logos animate__animated animate__fadeIn" style="position: relative;">
+                        <div class="animate__animated animate__flipInX creadoPor" style="position: absolute;display: flex;align-items: center;justify-content: center;bottom: 0px;z-index: 1;width: 289px;bottom: 25px;">
+                            <span style="font-weight: bold; font-size: 11px; color: black; margin-right: 5px;">by</span>
+                            <img src="logoCompuconta.png" alt="Logo Compuconta" style="width: 86px;">
+                        </div>
+                        <div class="fondoAnimado">
+                            <div class="area" >
+                                <ul class="circles">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="position:absolute;background: rgb(26 164 175);height: 226px;width: 100px;z-index: 1;border-radius: 50%;left: -27px;top: -126px; filter: drop-shadow(-3px 3px 5px black);"></div>
+                        <div style="position:absolute;background: rgb(233 127 16);height: 226px;width: 100px;z-index: 1;border-radius: 50%;left: -56px;top: -44px;filter: drop-shadow(-3px 3px 5px black);"></div>
+                        <div style="position:absolute;background: rgb(44 163 60);height: 226px;width: 100px;z-index: 1;border-radius: 50%;left: -71px;filter: drop-shadow(-3px 3px 5px black);"></div>
+                        <div hidden class="cornerFirst"></div>
+                        <div hidden class="cornerSecond"></div>
+                        <img class="patron" src="fondoPatron.png" alt="Actualizar información" hidden>
+                        <img class="imagenPatron" src="imagenPatron.png" alt="Actualizar información" hidden>
+                        <img class="login animate__animated animate__flipInX" src="logo_bellatriz.png" alt="Actualizar información">
+                        <img class="profile" src="profileBellatriz.png" alt="Actualizar información">
+                        <div style="height: 480px; width: 345px; overflow: hidden; position: relative; border-radius: 18px;">
+                            <svg viewBox="0 0 280 130" preserveAspectRatio="none" style="height: 100%; width: 100%; position:absolute; border-radius:18px; filter: drop-shadow(2px 0px 13px black);">
+                                <path d="M208.08,0.00 C152.69,67.09 298.81,131.75 200.80,150.00 L0.00,150.00 L0.00,0.00 Z" style="stroke: none; fill: #E2E2E2;"></path>
                             </svg>
                         </div>
                     </div>
-                    <div id="divAsistenteDireccion" class="list divFormulario animate__animated animate__fadeIn" style="display: none;">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div class="labelAsistenteDireccion" style="transition: all 0.5s ease;">
-                                <i class="fas fa-map-marker-alt" style="margin-right: 5px; color: #105bab;"></i>
-                                <b style="color: #105bab;">Asistente de dirección</b>
+                    <div class="col containerFormulario">
+                        <div style="position: relative;" class="logosMinus animate__animated animate__fadeIn">
+                            <div class="cornerMinus">
+                                <div class="corner1"></div>
+                                <div class="corner2"></div>
+                                <div class="corner3"></div>
                             </div>
-                            <div style="display:flex; align-items:center">
-                                <i class="fas fa-hotel" id="iconUrbano" style="margin-right:5px; color:#105bab"></i>
-                                <label class="switch btn-color-mode-switch label">
-                                    <input value="1" id="color_mode" type="checkbox" onchange="seleccionarZona(event)">
-                                    <label class="btn-color-mode-switch-inner label" data-off="Urbana" data-on="Rural" for="color_mode"></label>
-                                </label>
-                                <i class="fas fa-home" id="iconRural" style="margin-left:5px; color:rgb(128 128 128 / 73%)"></i>
+                            <img class="patronMinus" src="patronBanner.png" alt="Actualizar información" hidden>
+                            <img class="loginMinus animate__animated animate__flipInX" src="logo_bellatriz.png" alt="Actualizar información" style="transition: all 0.5s ease; position: absolute; z-index: 1;">
+                            <img class="logo animate__animated animate__flipInX" src="logo_bellatriz_minus.png" alt="Actualizar información">
+                            <div class="divMinus" style="transition: all 0.5s ease; overflow: hidden; position: relative; border-radius: 18px;">
+                                <div class="fondoAnimadoMinus">
+                                    <div class="area" >
+                                        <ul class="circles">
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <svg class="wave" viewBox="0 0 500 150" preserveAspectRatio="none">
+                                    <path d="M-1.97,92.28 C131.20,196.88 241.25,-42.91 505.92,102.14 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #E2E2E2;"></path>
+                                </svg>
+                                <div class="animate__animated animate__flipInX creadoPorMinusCabecera">
+                                    <span style="font-weight: bold; font-size: 8px; color: black; margin-right: 5px;">by</span>
+                                    <img src="logoCompuconta.png" alt="Logo Compuconta" style="width: 70px;">
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div id="seccionUrbana" class="animate__animated animate__fadeIn">
-                            <div class="row">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-road"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
-                                            <option value="">Ubicación</option>
-                                            <option value="CL">Calle</option>
-                                            <option value="CR">Carrera</option>
-                                            <option value="ACR">Avenida carrera</option>
-                                        </select>
-                                        <input type="text" class="form-control camposZonaUrbana">
-                                    </div>
+                        <div id="divAsistenteDireccion" class="list divFormulario animate__animated animate__fadeIn" style="display: none;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="labelAsistenteDireccion" style="transition: all 0.5s ease;">
+                                    <i class="fas fa-map-marker-alt" style="margin-right: 5px; color: #105bab;"></i>
+                                    <b style="color: #105bab;">Asistente de dirección</b>
                                 </div>
-                                <div class="col-6 camposFormulario" data-opc="2" style="display: flex;">
-                                    <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
-                                        <option value="">Letra</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                    </select>
-                                    <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef;">
-                                        <b style="font-size: 14px; margin-right:5px; margin-left:5px; color: #4c4f56; margin-top: -1px;">BIS</b>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input camposZonaUrbana" data-tipo="1" id="bis">
-                                            <label class="custom-control-label" for="bis"></label>
-                                        </div>
-                                    </div>
+                                <div style="display:flex; align-items:center">
+                                    <i class="fas fa-hotel" id="iconUrbano" style="margin-right:5px; color:#105bab"></i>
+                                    <label class="switch btn-color-mode-switch label">
+                                        <input value="1" id="color_mode" type="checkbox" onchange="seleccionarZona(event)">
+                                        <label class="btn-color-mode-switch-inner label" data-off="Urbana" data-on="Rural" for="color_mode"></label>
+                                    </label>
+                                    <i class="fas fa-home" id="iconRural" style="margin-left:5px; color:rgb(128 128 128 / 73%)"></i>
                                 </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-signs"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px; width: 60px;">
-                                            <option value="">Zona</option>
-                                            <option value="N">Norte</option>
-                                            <option value="S">SUR</option>
-                                        </select>
-                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
-                                            <option value="">Letra</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2" style="display: flex;">
-                                    <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef; width: 46px;">
-                                        <b>#</b>
-                                    </div>
-                                    <input type="text" class="form-control camposZonaUrbana">
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-sort-alpha-down"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
-                                            <option value="">Letra</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                        </select>
-                                        <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef; width: 46px;">
-                                            <i class="fas fa-minus" style="font-size:11px"></i>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control camposZonaUrbana">
-                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px; width: 60px;">
-                                            <option value="">Zona</option>
-                                            <option value="N">Norte</option>
-                                            <option value="S">SUR</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px;">
-                                <i class="fas fa-thumbtack" style="margin-right: 5px; color: #105bab;"></i>
-                                <b style="color: #105bab;">Datos opcionales de dirección</b>
                             </div>
                             <hr>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group" style="height: 38px;">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-location-arrow"></i>
-                                            </label>
+                            <div id="seccionUrbana" class="animate__animated animate__fadeIn">
+                                <div class="row">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-road"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
+                                                <option value="">Ubicación</option>
+                                                <option value="CL">Calle</option>
+                                                <option value="CR">Carrera</option>
+                                                <option value="ACR">Avenida carrera</option>
+                                            </select>
+                                            <input type="text" class="form-control camposZonaUrbana">
                                         </div>
-                                        <select class="form-control custom-select" style="font-size: 14px; height: 38px;" required id="ubicacionUrbana">
-                                            <option value="">Seleccione ubicación</option>
-                                            <option value="AGP">Agrupación</option>
-                                            <option value="AP">Apartamento</option>
-                                            <option value="UR">Unidad residencial</option>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2" style="display: flex;">
+                                        <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
+                                            <option value="">Letra</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-marked-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Dirección" id="direccionUrbana">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" readonly id="direccionZonaUrbana" placeholder="Dirección zona urbana">
-                                        <button class="btn btn-success" style="margin-left:12px; font-size: 14px;" data-opc="2" onclick="agregarDireccion(event)"><i class="fas fa-plus" style="font-size:12px"></i></button>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="animate__animated animate__fadeIn" id="seccionRural" style="display: none;">
-                            <div class="row">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend" style="height: 38px;">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-location-arrow"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" style="font-size: 14px; height: 38px;" required id="ubicacionRural">
-                                            <option value="">Seleccione ubicación</option>
-                                            <option value="AGP">Agrupación</option>
-                                            <option value="AP">Apartamento</option>
-                                            <option value="UR">Unidad residencial</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-marked-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Dirección" id="direccionRural">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-12" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" readonly id="direccionZonaRural" placeholder="Dirección zona rural">
-                                        <button class="btn btn-success" style="margin-left:12px; font-size: 14px;" data-opc="1" onclick="agregarDireccion(event)"><i class="fas fa-plus" style="font-size:12px"></i></button>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
-                        <hr>
-                        <button class="btn btn-primary" style="font-size: 14px;" onclick="guardarDireccion()"><i class="fas fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger" onclick="showFormulario()" style="font-size: 14px;"><i class="fas fa-caret-left"></i> Regresar</button>
-                    </div>
-                    <form class="mb-0 formulario" id="formulario" onsubmit="guardarTercero(event)">
-                        <div class="list divFormulario">
-                            <div class="row">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-circle"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" name="tipoPersona" style="font-size: 14px;" onchange="seleccionarTipoPersona(this)">
-                                            <option value="1">Natural</option>
-                                            <option value="2">Jurídica</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-address-card"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" id="tipoIdentificacion" name="tipoIdentificacion" style="font-size: 14px;">
-                                            <option value="1">Cédula</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-id-card-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" id="identificacion" name="identificacion" onblur="buscarDigito()" oninput="formatearCampo(event)" placeholder="Número identificación" required>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-check-circle"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" id="digitoVerificacion" name="digitoVerificacion" placeholder="Dígito verificación" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2 nombres">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-plus"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control camposNombre" id="primerApellido" name="primerApellido" placeholder="Apellido 1" required>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-plus"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Apellido 2">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2 nombres">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-tag"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control camposNombre" id="primerNombre" name="primerNombre" placeholder="Nombre 1" required>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-tag"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Nombre 2">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2 animate__animated animate__flipInX" id="razonSocial" style="display: none;">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-user-tie"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" name="razonSocial" placeholder="Razón social" id="campoRazonSocial">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-globe-americas"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" id="pais" name="pais" style="font-size: 14px;" data-opc="2" required>
-                                            <option value="">Seleccione país</option>
-                                            <option value="1">Colombia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-university"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" id="departamento" name="departamento" style="font-size: 14px;" data-opc="3" required>
-                                            <option value="">Seleccione departamento</option>
-                                            <option value="1">Nariño</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend" style="height: 38px;">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-hotel"></i>
-                                            </label>
-                                        </div>
-                                        <select class="form-control custom-select" id="municipio" name="municipio" style="font-size: 14px; height: 38px;" required>
-                                            <option value="">Seleccione municipio</option>
-                                            <option value="1">Pasto</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-at"></i>
-                                            </label>
-                                        </div>
-                                        <input type="email" class="form-control" name="email" placeholder="Correo electrónico" autocomplete="off" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6 pr-0 camposFormulario" data-opc="1">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                            </label>
-                                        </div>
-                                        <input id="direccionTercero" type="text" class="form-control" minlength="5" name="direccion" placeholder="Dirección" autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="col-6 camposFormulario" data-opc="2">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text">
-                                                <i class="fas fa-phone"></i>
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" name="telefono" minlength="7" placeholder="Teléfono" autocomplete="off" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <label class="input-group-text form-control" for="declarante" style="justify-content: start; background: #e9ecef;">
-                                            <i class="fas fa-coins"></i>
-                                            <b style="font-size: 14px; margin-left:5px">Declarante</b>
-                                        </label>
-                                        <div class="input-group-text d-flex justify-content-center" style="background: transparent; width:auto" for="declarante">
+                                        <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef;">
+                                            <b style="font-size: 14px; margin-right:5px; margin-left:5px; color: #4c4f56; margin-top: -1px;">BIS</b>
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="declarante" name="declarante">
-                                                <label class="custom-control-label" for="declarante"></label>
+                                                <input type="checkbox" class="custom-control-input camposZonaUrbana" data-tipo="1" id="bis">
+                                                <label class="custom-control-label" for="bis"></label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-signs"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px; width: 60px;">
+                                                <option value="">Zona</option>
+                                                <option value="N">Norte</option>
+                                                <option value="S">SUR</option>
+                                            </select>
+                                            <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
+                                                <option value="">Letra</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2" style="display: flex;">
+                                        <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef; width: 46px;">
+                                            <b>#</b>
+                                        </div>
+                                        <input type="text" class="form-control camposZonaUrbana">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-sort-alpha-down"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px;">
+                                                <option value="">Letra</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                            </select>
+                                            <div style="display: flex; align-items: center; justify-content: center; border: 1px solid #d0d4da; background: #eaecef; width: 46px;">
+                                                <i class="fas fa-minus" style="font-size:11px"></i>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control camposZonaUrbana">
+                                            <select class="form-control custom-select camposZonaUrbana" style="font-size: 14px; height: 38px; width: 60px;">
+                                                <option value="">Zona</option>
+                                                <option value="N">Norte</option>
+                                                <option value="S">SUR</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <i class="fas fa-thumbtack" style="margin-right: 5px; color: #105bab;"></i>
+                                    <b style="color: #105bab;">Datos opcionales de dirección</b>
+                                </div>
+                                <hr>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group" style="height: 38px;">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-location-arrow"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" style="font-size: 14px; height: 38px;" required id="ubicacionUrbana">
+                                                <option value="">Seleccione ubicación</option>
+                                                <option value="AGP">Agrupación</option>
+                                                <option value="AP">Apartamento</option>
+                                                <option value="UR">Unidad residencial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-marked-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Dirección" id="direccionUrbana">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" readonly id="direccionZonaUrbana" placeholder="Dirección zona urbana">
+                                            <button class="btn btn-success" style="margin-left:12px; font-size: 14px;" data-opc="2" onclick="agregarDireccion(event)"><i class="fas fa-plus" style="font-size:12px"></i></button>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="animate__animated animate__fadeIn" id="seccionRural" style="display: none;">
+                                <div class="row">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend" style="height: 38px;">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-location-arrow"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" style="font-size: 14px; height: 38px;" required id="ubicacionRural">
+                                                <option value="">Seleccione ubicación</option>
+                                                <option value="AGP">Agrupación</option>
+                                                <option value="AP">Apartamento</option>
+                                                <option value="UR">Unidad residencial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-marked-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Dirección" id="direccionRural">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" readonly id="direccionZonaRural" placeholder="Dirección zona rural">
+                                            <button class="btn btn-success" style="margin-left:12px; font-size: 14px;" data-opc="1" onclick="agregarDireccion(event)"><i class="fas fa-plus" style="font-size:12px"></i></button>
+                                        </div>
+                                    </div> 
+                                </div>
                             </div>
                             <hr>
-                            <button type="submit" id="btnActualizarInformacion" class="btn btn-success" style="font-size: 14px;"><i class="fas fa-sync-alt"></i> Actualizar información</button>
+                            <button class="btn btn-primary" style="font-size: 14px;" onclick="guardarDireccion()"><i class="fas fa-save"></i> Guardar</button>
+                            <button class="btn btn-danger" onclick="showFormulario()" style="font-size: 14px;"><i class="fas fa-caret-left"></i> Regresar</button>
                         </div>
-                    </form>
+                        <form class="mb-0 formulario" id="formulario" onsubmit="guardarTercero(event)">
+                            <div class="list divFormulario">
+                                <div class="row">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-circle"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" name="tipoPersona" style="font-size: 14px;" onchange="seleccionarTipoPersona(this)">
+                                                <option value="1">Natural</option>
+                                                <option value="2">Jurídica</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-address-card"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" id="tipoIdentificacion" name="tipoIdentificacion" style="font-size: 14px;">
+                                                <option value="1">Cédula</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-id-card-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" id="identificacion" name="identificacion" onblur="buscarDigito()" oninput="formatearCampo(event)" placeholder="Número identificación" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" id="digitoVerificacion" name="digitoVerificacion" placeholder="Dígito verificación" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 nombres">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-plus"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control camposNombre" id="primerApellido" name="primerApellido" placeholder="Apellido 1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-plus"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Apellido 2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 nombres">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-tag"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control camposNombre" id="primerNombre" name="primerNombre" placeholder="Nombre 1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-tag"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Nombre 2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 animate__animated animate__flipInX" id="razonSocial" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-user-tie"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" name="razonSocial" placeholder="Razón social" id="campoRazonSocial">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-globe-americas"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" id="pais" name="pais" style="font-size: 14px;" data-opc="2" required>
+                                                <option value="">Seleccione país</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-university"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" id="departamento" name="departamento" style="font-size: 14px;" data-opc="3" required>
+                                                <option value="">Seleccione departamento</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend" style="height: 38px;">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-hotel"></i>
+                                                </label>
+                                            </div>
+                                            <select class="form-control custom-select" id="municipio" name="municipio" style="font-size: 14px; height: 38px;" required>
+                                                <option value="">Seleccione municipio</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-at"></i>
+                                                </label>
+                                            </div>
+                                            <input type="email" class="form-control" name="email" placeholder="Correo electrónico" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6 pr-0 camposFormulario" data-opc="1">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </label>
+                                            </div>
+                                            <input id="direccionTercero" type="text" class="form-control" minlength="5" name="direccion" placeholder="Dirección" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 camposFormulario" data-opc="2">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </label>
+                                            </div>
+                                            <input type="text" class="form-control" name="telefono" minlength="7" placeholder="Teléfono" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <label class="input-group-text form-control" for="declarante" style="justify-content: start; background: #e9ecef;">
+                                                <i class="fas fa-coins"></i>
+                                                <b style="font-size: 14px; margin-left:5px">Declarante renta</b>
+                                            </label>
+                                            <div class="input-group-text d-flex justify-content-center" style="background: transparent; width:auto" for="declarante">
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="declarante" name="declarante">
+                                                    <label class="custom-control-label" for="declarante"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <button type="submit" id="btnActualizarInformacion" class="btn btn-success" style="font-size: 14px;"><i class="fas fa-sync-alt"></i> Actualizar información</button>
+                                <div class="animate__animated animate__flipInX creadoPorMinus">
+                                    <span style="font-weight: bold; font-size: 11px; color: black; margin-right: 5px;">by</span>
+                                    <img src="logoCompuconta.png" alt="Logo Compuconta" style="width: 86px;">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
 <script type="text/javascript">
 
